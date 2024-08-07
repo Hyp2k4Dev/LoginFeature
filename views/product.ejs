@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      .product-image {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container my-4">
+      <header class="mb-4">
+        <h1 class="display-4"><%= product.name %></h1>
+      </header>
+
+      <!-- Product Details -->
+      <div class="row">
+        <div class="col-md-6">
+          <% if (product.image) { %>
+          <img
+            src="<%= product.image %>"
+            alt="<%= product.name %>"
+            class="product-image img-fluid mb-3"
+          />
+          <% } else { %>
+          <p>No image available</p>
+          <% } %>
+        </div>
+        <div class="col-md-6">
+          <p class="lead">Price: $<%= product.price %></p>
+          <p>Description: <%= product.description %></p>
+        </div>
+      </div>
+
+      <!-- Back to Products List -->
+      <a href="/products" class="btn btn-secondary mt-4">Back to Products</a>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
