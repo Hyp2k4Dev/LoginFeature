@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+const passportLocalMongoose = require("passport-local-mongoose");
 const productSchema = new mongoose.Schema({
   name: String,
   description: String,
@@ -7,3 +9,7 @@ const productSchema = new mongoose.Schema({
     default: [], // Default to an empty array
   },
 });
+
+productSchema.plugin(passportLocalMongoose);
+
+module.exports = mongoose.model("Product", productSchema);
