@@ -219,6 +219,35 @@ app.post("/register", async (req, res) => {
   }
 });
 
+app.get("/account", isLoggedIn, (req, res) => {
+  res.render("account", { user: req.user });
+});
+
+app.post("/account", isLoggedIn, async (req, res) => {
+  const { name, email } = req.body;
+
+  try {
+    // Find the logged-in user
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Update the user's name and email
+    user.username = name;
+    user.email = email;
+
+    // Save the updated user details
+    await user.save();
+
+    res.redirect("/secret"); // Redirect to a different page after update
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 app.get("/verify/:code", async (req, res) => {
   try {
     const verificationCode = req.params.code;
